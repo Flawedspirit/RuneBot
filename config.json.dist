@@ -1,0 +1,8 @@
+{
+    "token": "<Your bot token>",
+    "prefix": "!",
+    "owners": [],
+    "errorMessage": "**Oof!** Please tell my owner that I've broken.",
+    "logTimestamps": true,
+    "debug": false
+}
