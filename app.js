@@ -11,10 +11,7 @@ const config        = reload('./config.json');
 const logger        = new(reload('./utils/Logger.class.js'))(config.logTimestamps);
 
 /* LOCAL VARIABLES */
-const client = new Discord.Client({
-    autorun: true
-});
-
+const client        = new Discord.Client();
 client.commands     = new Discord.Collection();
 client.cooldowns    = new Discord.Collection();
 
@@ -53,13 +50,14 @@ client.on('message', message => {
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
+    // Command doesn't even exist
     if(!command) return;
 
     // Provide usage info if arguments are omitted
     // Display per-command usage info if provided or a generic error if not
     if(command.hasArgs && !args.length) {
         let message;
-        
+
         if(command.usage) {
             message = `**Usage:** ${config.prefix}${command.name} ${command.usage}`;
         } else {
