@@ -4,8 +4,8 @@
  */
 
 /**
- * Gets the name of a skill based on its hiscores index number.
- * @param {Number} index An index value between 0 and 23 (inclusive).
+ * Gets the name of a skill or activity based on its hiscores index number.
+ * @param {Number} index An index value between 0 and 78 (inclusive).
  * @returns {String} The skill name.
  */
 exports.getSkillFromIndex = function(index) {
@@ -33,7 +33,62 @@ exports.getSkillFromIndex = function(index) {
         'Farming',
         'Runecrafting',
         'Hunter',
-        'Construction'
+        'Construction',
+        'League Points',
+        'Bounty Hunter - Hunter',
+        'Bounty Hunter - Rogue',
+        'Clue Scrolls (all)',
+        'Clue Scrolls (beginner)',
+        'Clue Scrolls (easy)',
+        'Clue Scrolls (medium)',
+        'Clue Scrolls (hard)',
+        'Clue Scrolls (elite)',
+        'Clue Scrolls (master)',
+        'LMS - Rank',
+        'Abyssal Sire',
+        'Alchemical Hydra',
+        'Barrows Chests',
+        'Bryophyta',
+        'Callisto',
+        'Cerberus',
+        'Chambers of Xeric',
+        'CoX: Challenge Mode',
+        'Chaos Elemental',
+        'Chaos Fanatic',
+        'Commander Zilyana',
+        'Corporeal Beast',
+        'Crazy Archaeologist',
+        'Dagannoth Prime',
+        'Dagannoth Rex',
+        'Dagannoth Supreme',
+        'Deranged Archaeologist',
+        'General Graardor',
+        'Giant Mole',
+        'Grotesque Guardians',
+        'Hespori',
+        'Kalphite Queen',
+        'King Black Dragon',
+        'Kraken',
+        'Kree\'Arra',
+        'K\'ril Tsutsaroth',
+        'Mimic',
+        'Nightmare',
+        'Obor',
+        'Sarachnis',
+        'Scorpia',
+        'Skotizo',
+        'The Gauntlet',
+        'The Corrupted Gauntlet',
+        'Theatre of Blood',
+        'Thermonuclear Smoke Devil',
+        'TzKal-Zuk',
+        'TzTok-Jad',
+        'Venenatis',
+        'Vet\'ion',
+        'Vorkath',
+        'Wintertodt',
+        'Zalcano',
+        'Zulrah'
     ];
 
     return skillName[index];

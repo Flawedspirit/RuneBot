@@ -12,10 +12,10 @@ const logger        = new(reload('../utils/Logger.class.js'))(config.logTimestam
 const numFormat     = new Intl.NumberFormat('en-US');
 
 module.exports = {
-    name: 'stats',
-    description: 'Retrieves your stats from the OSRS Hiscores',
+    name: 'stats-im',
+    description: 'Retrieves your stats from the Ironman OSRS Hiscores',
     usage: '<username>',
-    aliases: ['07stats', 'hiscores', 'hs'],
+    aliases: ['07stats-im', 'hiscores-im', 'hsim', 'btw'],
     cooldown: 10,
     hasArgs: true,
     execute(message, args) {
@@ -27,7 +27,7 @@ module.exports = {
         }
 
         // Everything should be fine at this point. Perform the lookup
-        superagent.get(`https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?player=${user}`)
+        superagent.get(`https://secure.runescape.com/m=hiscore_oldschool_ironman/index_lite.ws?player=${user}`)
         .end((error, response) => {
             if(error) {
                 logger.logWarn(`Error parsing hiscores: ${error.status || error.response}`);
@@ -43,7 +43,7 @@ module.exports = {
                     result[i] = statResponse[i].split(',');
                 }
                 let table = new asciiTable();
-                table.setTitle(`VIEWING STATS FOR ${user.toUpperCase()}`);
+                table.setTitle(`VIEWING IRONMAN STATS FOR ${user.toUpperCase()}, BTW`);
                 table.setHeading('Skill', 'Level', 'Experience', 'Rank');
                 table.setBorder('|', '-', 'o', 'o');
 

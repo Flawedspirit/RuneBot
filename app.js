@@ -55,15 +55,14 @@ client.on('message', message => {
 
     // Provide usage info if arguments are omitted
     // Display per-command usage info if provided or a generic error if not
+    let out = '';
     if(command.hasArgs && !args.length) {
-        let message;
-
         if(command.usage) {
-            message = `**Usage:** ${config.prefix}${command.name} ${command.usage}`;
+            out = `**Usage:** ${config.prefix}${command.name} ${command.usage}`;
         } else {
-            message = `Incorrect number of args for command: ${command.name}`;
+            out = `Incorrect number of args for command: ${command.name}`;
         }
-        return message.channel.send(message);
+        return message.channel.send(out);
     }
 
     // Handle command cooldowns
