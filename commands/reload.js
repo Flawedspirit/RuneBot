@@ -8,8 +8,11 @@ const logger    = new(reload('../utils/Logger.class.js'))(config.logTimestamps);
 module.exports = {
     name: 'reload',
     desc: 'Reloads a command',
+    usage: '<command>',
     cooldown: 10,
     hidden: true,
+    requireOwner: true,
+    hasArgs: true,
     execute(message, args) {
         if(!args.length) {
             return message.channel.send('You must provide a command to reload.');
@@ -27,7 +30,7 @@ module.exports = {
                 message.channel.send(`Reloaded command: ${command.name}.`);
             } catch(ex) {
                 logger.logError(`${ex}\n${ex.stack}`, 'ERROR//CMD');
-                message.channel.send(`There was an error reloading command: ${command.name}.`);
+                message.channel.send(config.errorMessage);
             }
         }
     }

@@ -1,4 +1,4 @@
-/* REQUIRE NODE 8+ TO USE THE BOT */
+/* REQUIRE NODE 12+ TO USE THE BOT */
 if(parseFloat(process.versions.node) < 12) throw new Error('Incompatible Node.js version. Please use version 12 or higher.');
 
 /* REQUIRED DEPENDENCIES */
@@ -10,13 +10,15 @@ const reload        = require('require-reload')(require);
 const config        = reload('./config.json');
 const logger        = new(reload('./utils/Logger.class.js'))(config.logTimestamps);
 
-// Initialize commands
+/* LOCAL VARIABLES */
 const client = new Discord.Client({
     autorun: true
 });
+
 client.commands     = new Discord.Collection();
 client.cooldowns    = new Discord.Collection();
 
+// Initialize commands
 function loadCommands() {
     return new Promise(resolve => {
         const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -53,6 +55,19 @@ client.on('message', message => {
 
     if(!command) return;
 
+    // Provide usage info if arguments are omitted
+    // Display per-command usage info if provided or a generic error if not
+    if(command.hasArgs && !args.length) {
+        let message;
+        
+        if(command.usage) {
+            message = `**Usage:** ${config.prefix}${command.name} ${command.usage}`;
+        } else {
+            message = `Incorrect number of args for command: ${command.name}`;
+        }
+        return message.channel.send(message);
+    }
+
     // Handle command cooldowns
     if(!client.cooldowns.has(command.name)) {
         // Create collection of commands with cooldowns
@@ -76,7 +91,14 @@ client.on('message', message => {
     lastCommand.set(message.author.id, now);
     setTimeout(() => lastCommand.delete(message.author.id), cooldownTime);
 
-    try {
+    // Check if command is restricted to specified user IDs
+    // If so, reject and DM the user with an error
+    if(command.requireOwner && !config.owners.includes(message.author.id)) {
+        return client.users.cache.get(message.author.id).send('This command can only be used by a server owner.');
+    }
+
+    try {        
+        // Execute command if no other blocking condition exists
         command.execute(message, args);
     } catch(ex) {
         logger.logError(ex);

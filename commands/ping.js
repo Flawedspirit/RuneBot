@@ -15,8 +15,7 @@ module.exports = {
     name: 'ping',
     desc: 'Pings the bot',
     aliases: ['p'],
-    cooldown: 1,
-    hidden: false,
+    cooldown: 3,
     execute(message) {
         let choice = ~~(Math.random() * responses.length);
         message.channel.send(responses[choice]);
