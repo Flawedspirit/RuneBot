@@ -3,7 +3,6 @@ const asciiTable    = require('ascii-table');
 const reload        = require('require-reload');
 
 /* REQUIRED FILES */
-const config        = reload('../config.json');
 const utils         = reload('../utils/utils.js');
 
 /* SET NUMBER FORMAT */
