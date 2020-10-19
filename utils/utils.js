@@ -1,6 +1,7 @@
 /* REQUIRED DEPENDENCIES */
 const superagent    = require('superagent');
 const reload        = require('require-reload');
+const exchange      = require('osrs-exchange').default;
 
 /* REQUIRED FILES */
 const config        = reload('../config.json');
@@ -136,16 +137,14 @@ exports.doHighScoresLookup = function(hiscore, user, bossMode = false) {
         }
 
         // Everything should be fine at this point. Perform the lookup
-        superagent.get(`https://secure.runescape.com/m=${hiscore}/index_lite.ws?player=${user}`)
-        .end((error, response) => {
+        superagent.get(`https://secure.runescape.com/m=${hiscore}/index_lite.ws?player=${user}`).end((error, response) => {
             if(error) {
                 if(error.status === 404) {
                     reject(`No user named ${user} was found.`);
                 } else {
                     reject(`There was an issue looking up stats for ${user}. Please try again later.`);
                     logger.logWarn(`Could not lookup stats for ${user}: ${error} [${error.status}]`);
-                }
-                
+                }                
             } else {
                 let statResponse = response.text.split('\n');
                 let hsArray = [];
@@ -158,4 +157,35 @@ exports.doHighScoresLookup = function(hiscore, user, bossMode = false) {
             }      
         });
     });   
+}
+
+exports.doItemLookup = function(item) {
+    return new Promise((resolve, reject) => {
+        // Sanity test to make sure input can only be a valid item name
+        if(!/^[A-Za-z0-9\-\'\(\)\+\.\ ]+$/.test(item)) {
+            reject('That is not a valid RuneScape item.');
+            return;
+        }
+
+        exchange.getItemByName().then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        // superagent.get(`https://rscript.org/lookup.php?type=ge&search=${item}`).end((error, response) => {
+        //     if(error) {
+        //         if(error.status === 404) {
+        //             reject(`No item named ${item} was found.`);
+        //         } else {
+        //             reject(`There was an issue looking up item ${item}. Please try again later.`);
+        //             logger.logWarn(`Could not lookup item ${item}: ${error} [${error.status}]`);
+        //         }                
+        //     } else {
+        //         //let itemResponse = response.text.split('\n');
+        //         let itemResponse = response.text;
+        //         console.log(itemResponse);
+        //     }   
+        // });
+    }); 
 }
