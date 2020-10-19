@@ -103,20 +103,17 @@ exports.getSkillFromIndex = function(index) {
 }
 
 /**
- * Parses the OSRS hiscores and returns a string array of skills, exp, and rankings.
+ * Parses the OSRS hiscores and returns the minimum value used, the maximum value used, and an array containing the resulting hiscore values.
  * @param {String} hiscore Which OSRS hiscore to parse. Choices include:
- * <ul>
- *  <li>hiscore_oldschool</li>
-    <li>hiscore_oldschool_ironman</li>
-    <li>hiscore_oldschool_hardcore_ironman</li>
-    <li>hiscore_oldschool_ultimate</li>
-    <li>hiscore_oldschool_deadman</li>
- * </ul
+ * @param {String} hiscore.hiscore_oldschool Standard hiscores</li>
+ * @param {String} hiscore.hiscore_oldschool_ironman Ironman hiscores</li>
+ * @param {String} hiscore.hiscore_oldschool_hardcore_ironman Hardcore ironman hiscores</li>
+ * @param {String} hiscore.hiscore_oldschool_ultimate Ultimate ironman hiscores</li>
+ * @param {String} hiscore.hiscore_oldschool_deadman Deadman mode hiscores</li>
  * @param {String} user A RuneScape username.
- * @param {Boolean} [bossMode=false] Whether to return the boss killcount.
- * @returns {Array<String>}
+ * @returns {Array<Number, Number, Array<String>>}
  */
-exports.doHighScoresLookup = function(message, hiscore, user, bossMode = false) {
+exports.doHighScoresLookup = function(hiscore, user, bossMode = false) {
     return new Promise((resolve, reject) => {
         let lookupIndex = [];
         switch(hiscore) {
@@ -125,29 +122,39 @@ exports.doHighScoresLookup = function(message, hiscore, user, bossMode = false) 
             case('hiscore_oldschool_hardcore_ironman'):
             case('hiscore_oldschool_ultimate'):
             case('hiscore_oldschool_deadman'):
-            lookupIndex = [0, 23];
+            default:
+                lookupIndex = [0, 23];
+                break;
+            case('hiscore_bosses'):
+                lookupIndex = [35, 78];
         }
 
         // Sanity test to make sure input can only be a valid username
         if(!/^[A-Za-z0-9\-\ ]+$/.test(user) || user.length > 12) {
             reject('That is not a valid RuneScape username.');
+            return;
         }
 
         // Everything should be fine at this point. Perform the lookup
         superagent.get(`https://secure.runescape.com/m=${hiscore}/index_lite.ws?player=${user}`)
         .end((error, response) => {
             if(error) {
-                logger.logWarn(`Error parsing hiscores: ${error.status || error.response}`);
-                reject(`There was an issue looking up stats for ${user}. Please try again later.`);
-            } else {
-                let statResponse = response.text.split('\n');
-                let result = [];
-
-                for(let i = lookupIndex[0]; i <= lookupIndex[1]; i++) {
-                    result[i] = statResponse[i].split(',');
+                if(error.status === 404) {
+                    reject(`No user named ${user} was found.`);
+                } else {
+                    reject(`There was an issue looking up stats for ${user}. Please try again later.`);
+                    logger.logWarn(`Could not lookup stats for ${user}: ${error} [${error.status}]`);
                 }
                 
-                resolve(result);
+            } else {
+                let statResponse = response.text.split('\n');
+                let hsArray = [];
+
+                for(let i = lookupIndex[0]; i <= lookupIndex[1]; i++) {
+                    hsArray[i] = statResponse[i].split(',');
+                }
+                
+                resolve([lookupIndex[0], lookupIndex[1], hsArray]);
             }      
         });
     });   
