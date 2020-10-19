@@ -55,12 +55,16 @@ client.on('message', message => {
 
     // Provide usage info if arguments are omitted
     // Display per-command usage info if provided or a generic error if not
-    let out = '';
     if(command.hasArgs && !args.length) {
+        let out = '';
         if(command.usage) {
-            out = `**Usage:** ${config.prefix}${command.name} ${command.usage}`;
+            out = `**Usage:** ${config.prefix}[${command.name}|`;
+            for(let i = 0; i < command.aliases.length; i++) {
+                out += command.aliases[i] + ((i == command.aliases.length - 1 ) ? ']' : '|');
+            }
+            out += ` ${command.usage}`;
         } else {
-            out = `Incorrect number of args for command: ${command.name}`;
+            out = `Incorrect number of arguments for command: ${command.name}`;
         }
         return message.channel.send(out);
     }
@@ -85,6 +89,7 @@ client.on('message', message => {
         }
     }
 
+    // Makes sure cooldown list is cleared at the right time
     lastCommand.set(message.author.id, now);
     setTimeout(() => lastCommand.delete(message.author.id), cooldownTime);
 
