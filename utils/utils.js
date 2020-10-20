@@ -1,7 +1,9 @@
 /* REQUIRED DEPENDENCIES */
 const superagent    = require('superagent');
 const reload        = require('require-reload');
-const exchange      = require('osrs-exchange').default;
+const Exchange      = require('osrs-exchange').default;
+
+const exchange = new Exchange();
 
 /* REQUIRED FILES */
 const config        = reload('../config.json');
@@ -114,7 +116,7 @@ exports.getSkillFromIndex = function(index) {
  * @param {String} user A RuneScape username.
  * @returns {Array<Number, Number, Array<String>>}
  */
-exports.doHighScoresLookup = function(hiscore, user, bossMode = false) {
+exports.doHighScoresLookup = function(hiscore, user) {
     return new Promise((resolve, reject) => {
         let lookupIndex = [];
         switch(hiscore) {
@@ -163,29 +165,15 @@ exports.doItemLookup = function(item) {
     return new Promise((resolve, reject) => {
         // Sanity test to make sure input can only be a valid item name
         if(!/^[A-Za-z0-9\-\'\(\)\+\.\ ]+$/.test(item)) {
-            reject('That is not a valid RuneScape item.');
+            reject('That is not a valid RuneScape item name.');
             return;
         }
 
-        exchange.getItemByName().then((response) => {
-            console.log(response);
+        exchange.getItemByName(item).then((response) => {
+            resolve(response);
         }).catch((error) => {
-            console.log(error);
+            reject(`There was an issue looking up prices for ${item}. Please try again later.`);
+            logger.logWarn(`Could not lookup prices for ${item}: ${error}`);
         });
-
-        // superagent.get(`https://rscript.org/lookup.php?type=ge&search=${item}`).end((error, response) => {
-        //     if(error) {
-        //         if(error.status === 404) {
-        //             reject(`No item named ${item} was found.`);
-        //         } else {
-        //             reject(`There was an issue looking up item ${item}. Please try again later.`);
-        //             logger.logWarn(`Could not lookup item ${item}: ${error} [${error.status}]`);
-        //         }                
-        //     } else {
-        //         //let itemResponse = response.text.split('\n');
-        //         let itemResponse = response.text;
-        //         console.log(itemResponse);
-        //     }   
-        // });
     }); 
 }

@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "debug": "node --trace-warnings app.js",
     "generate-docs": "./node_modules/.bin/jsdoc -c .jsdoc.json --verbose"
   },
   "repository": {

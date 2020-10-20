@@ -1,5 +1,5 @@
 /* REQUIRED DEPENDENCIES */
-const asciiTable    = require('ascii-table');
+const Discord       = require('discord.js');
 const reload        = require('require-reload');
 
 /* REQUIRED FILES */
@@ -17,23 +17,49 @@ module.exports = {
     hasArgs: true,
     execute(message, args) {
         let item = args.join(' ').trim();
-        let table = new asciiTable();
 
         // Send a "bot is typing..." status immediately to notify user the bot is working
         message.channel.startTyping();
 
         utils.doItemLookup(item).then((result) => {
-            if(result) {
+            let members = result.members;
+            let memMessage = [];
+            let priceDelta = [];
 
+            if(members) {
+                memMessage = ['Members', 'https://files.flawedspirit.ca/runebot/member.png'];
+            } else {
+                memMessage = ['Free-to-play', 'https://files.flawedspirit.ca/runebot/free.png'];
             }
 
-            // There is output prepared. Print and stop "typing"
-            // setTimeout(() => {
-            //     message.channel.send('```\n' + table.toString() + '```')
-            //     .then(() => {
-            //         message.channel.stopTyping();
-            //     });
-            // }, 3000);
+            const messageOut = new Discord.MessageEmbed()
+            .setColor('#d4af37')
+            .setTitle(result.name)
+            .setDescription(result.description)
+            .setThumbnail(result.icon)
+            // .addFields(
+            //     { name: 'Price', value: `${numFormat.format(result.price.current)} gp` },
+            //     { name: 'Today', value: `${numFormat.format(result.price.change.today)} gp`, inline: true },
+            //     { name: '30 days', value: `${numFormat.format(result.price.change.day30)} gp`, inline: true },
+            //     { name: '90 days', value: `${numFormat.format(result.price.change.day90)} gp`, inline: true }
+            // )
+            .addField('Price', `${numFormat.format(result.price.current)} gp`)
+            .addField(
+                'Change', `\u2043 **Today:** ${numFormat.format(result.price.change.today)} gp\n` +
+                `\u2043 **30 days:** ${numFormat.format(result.price.change.day30)} gp\n` +
+                `\u2043 **90 days:** ${numFormat.format(result.price.change.day90)} gp\n` +
+                `\u2043 **180 days:** ${numFormat.format(result.price.change.day180)} gp`
+            )
+            .setTimestamp()
+            .setFooter(memMessage[0], memMessage[1])
+
+            //There is output prepared. Print and stop "typing"
+            setTimeout(() => {
+                message.channel.send(messageOut)
+                .then(() => {
+                    message.channel.stopTyping();
+                });
+            }, 0);
         }).catch(error => {
             message.channel.send(error);
             message.channel.stopTyping();
