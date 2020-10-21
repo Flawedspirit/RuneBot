@@ -7,6 +7,7 @@ const exchange = new Exchange();
 
 /* REQUIRED FILES */
 const config        = reload('../config.json');
+const problemItems  = reload('./problem_items.json');
 const logger        = new(reload('../utils/Logger.class.js'))(config.logTimestamps);
 
 /**
@@ -163,17 +164,25 @@ exports.doHighScoresLookup = function(hiscore, user) {
 
 exports.doItemLookup = function(item) {
     return new Promise((resolve, reject) => {
+        function doError(item, error) {
+            if(config.debug) logger.logWarn(`Could not lookup prices for ${item}: ${error}`);
+            reject(`Could not find ${item} on the GE listings. Please check to see if this item is tradeable or that its name is spelled correctly.`);
+        }
+
         // Sanity test to make sure input can only be a valid item name
         if(!/^[A-Za-z0-9\-\'\(\)\+\.\ ]+$/.test(item)) {
             reject('That is not a valid RuneScape item name.');
             return;
         }
 
-        exchange.getItemByName(item).then((response) => {
-            resolve(response);
-        }).catch((error) => {
-            reject(`There was an issue looking up prices for ${item}. Please try again later.`);
-            logger.logWarn(`Could not lookup prices for ${item}: ${error}`);
-        });
-    }); 
+        if(item in problemItems) {
+            exchange.getItemById(problemItems[item]).then((response) => {
+                resolve(response);
+            }).catch((error) => doError(item, error));
+        } else {
+            exchange.getItemByName(item).then((response) => {
+                resolve(response);
+            }).catch((error) => doError(item, error));
+        }
+    });
 }

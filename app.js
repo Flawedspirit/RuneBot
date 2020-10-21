@@ -10,6 +10,8 @@ const reload        = require('require-reload')(require);
 const config        = reload('./config.json');
 const logger        = new(reload('./utils/Logger.class.js'))(config.logTimestamps);
 
+const problemItems  = reload('./utils/problem_items.json');
+
 /* LOCAL VARIABLES */
 const client        = new Discord.Client();
 client.commands     = new Discord.Collection();

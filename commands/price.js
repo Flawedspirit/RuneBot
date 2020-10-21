@@ -13,7 +13,7 @@ module.exports = {
     description: 'Retrieves data on an item from the Grand Exchange',
     usage: '<item>',
     aliases: ['07price'],
-    cooldown: 10,
+    cooldown: 5,
     hasArgs: true,
     execute(message, args) {
         let item = args.join(' ').trim();
@@ -24,7 +24,6 @@ module.exports = {
         utils.doItemLookup(item).then((result) => {
             let members = result.members;
             let memMessage = [];
-            let priceDelta = [];
 
             if(members) {
                 memMessage = ['Members', 'https://files.flawedspirit.ca/runebot/member.png'];
@@ -37,12 +36,6 @@ module.exports = {
             .setTitle(result.name)
             .setDescription(result.description)
             .setThumbnail(result.icon)
-            // .addFields(
-            //     { name: 'Price', value: `${numFormat.format(result.price.current)} gp` },
-            //     { name: 'Today', value: `${numFormat.format(result.price.change.today)} gp`, inline: true },
-            //     { name: '30 days', value: `${numFormat.format(result.price.change.day30)} gp`, inline: true },
-            //     { name: '90 days', value: `${numFormat.format(result.price.change.day90)} gp`, inline: true }
-            // )
             .addField('Price', `${numFormat.format(result.price.current)} gp`)
             .addField(
                 'Change', `\u2043 **Today:** ${numFormat.format(result.price.change.today)} gp\n` +
