@@ -1,5 +1,6 @@
 {
     "token": "<Your bot token>",
+    "inviteLink": "",
     "prefix": "!",
     "owners": [],
     "errorMessage": "**Oof!** Please tell my owner that I've broken.",
