@@ -12,7 +12,7 @@ module.exports = {
     name: 'ironstats',
     description: 'Retrieves your stats from the OSRS Ironman Hiscores.',
     usage: '<username>',
-    aliases: ['07stats-im', 'hsim'],
+    aliases: ['07stats-im', 'hsim', 'btw'],
     cooldown: 10,
     hasArgs: true,
     execute(message, args) {
