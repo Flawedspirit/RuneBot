@@ -10,7 +10,7 @@ const numFormat     = new Intl.NumberFormat('en-US');
 
 module.exports = {
     name: 'stats',
-    description: 'Retrieves your stats from the OSRS Hiscores',
+    description: 'Retrieves your stats from the OSRS Hiscores.',
     usage: '<username>',
     aliases: ['07stats', 'hs'],
     cooldown: 10,

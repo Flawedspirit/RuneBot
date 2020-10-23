@@ -10,7 +10,7 @@ const numFormat     = new Intl.NumberFormat('en-US');
 
 module.exports = {
     name: 'uimstats',
-    description: 'Retrieves your stats from the OSRS Ultimate Ironman Hiscores',
+    description: 'Retrieves your stats from the OSRS Ultimate Ironman Hiscores.',
     usage: '<username>',
     aliases: ['07stats-uim', 'hsuim'],
     cooldown: 10,

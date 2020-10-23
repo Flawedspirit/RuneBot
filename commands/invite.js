@@ -6,7 +6,7 @@ const config    = reload('../config.json');
 
 module.exports = {
     name: 'invite',
-    desc: 'Creates an invite link for this bot',
+    description: 'Creates an invite link for this bot.',
     aliases: ['oauth', 'join'],
     cooldown: 10,
     execute(message) {

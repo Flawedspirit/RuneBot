@@ -7,7 +7,7 @@ const logger    = new(reload('../utils/Logger.class.js'))(config.logTimestamps);
 
 module.exports = {
     name: 'reload',
-    desc: 'Reloads a command',
+    description: 'Reloads a command.',
     usage: '<command>',
     cooldown: 10,
     hidden: true,

@@ -10,7 +10,7 @@ const numFormat     = new Intl.NumberFormat('en-US');
 
 module.exports = {
     name: 'hcstats',
-    description: 'Retrieves your stats from the OSRS Hardcore Ironman Hiscores',
+    description: 'Retrieves your stats from the OSRS Hardcore Ironman Hiscores.',
     usage: '<username>',
     aliases: ['07stats-hc', 'hshc'],
     cooldown: 10,

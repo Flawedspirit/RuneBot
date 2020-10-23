@@ -13,7 +13,7 @@ const numFormat     = new Intl.NumberFormat('en-US');
 
 module.exports = {
     name: 'bosses',
-    description: 'Retrieves your boss kill-counts from the OSRS Hiscores',
+    description: 'Retrieves your boss kill-counts from the OSRS Hiscores.',
     usage: '<username>',
     aliases: ['bosses', 'kc'],
     cooldown: 10,

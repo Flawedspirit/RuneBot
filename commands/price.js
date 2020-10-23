@@ -10,7 +10,7 @@ const numFormat     = new Intl.NumberFormat('en-US');
 
 module.exports = {
     name: 'price',
-    description: 'Retrieves data on an item from the Grand Exchange',
+    description: 'Retrieves data on an item from the Grand Exchange.',
     usage: '<item>',
     aliases: ['07price'],
     cooldown: 5,

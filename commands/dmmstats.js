@@ -10,7 +10,7 @@ const numFormat     = new Intl.NumberFormat('en-US');
 
 module.exports = {
     name: 'dmmstats',
-    description: 'Retrieves your stats from the OSRS Deadman Mode Hiscores',
+    description: 'Retrieves your stats from the OSRS Deadman Mode Hiscores.',
     usage: '<username>',
     aliases: ['07stats-dmm', 'hsdmm'],
     cooldown: 10,

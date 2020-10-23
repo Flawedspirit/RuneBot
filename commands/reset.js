@@ -1,6 +1,6 @@
 module.exports = {
     name: 'reset',
-    desc: 'Gets the time until the daily game reset',
+    description: 'Gets the time until the daily game reset.',
     cooldown: 3,
     execute(message) {
         let resetTime = new Date().setUTCHours(24, 0, 0, 0) - Date.now();

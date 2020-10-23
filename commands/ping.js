@@ -13,7 +13,7 @@ const responses = [
 
 module.exports = {
     name: 'ping',
-    desc: 'Pings the bot',
+    description: 'Pings the bot to make sure it\'s paying attention.',
     aliases: ['p'],
     cooldown: 1,
     execute(message) {
