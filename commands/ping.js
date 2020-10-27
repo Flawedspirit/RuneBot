@@ -14,10 +14,10 @@ const responses = [
 module.exports = {
     name: 'ping',
     description: 'Pings the bot to make sure it\'s paying attention.',
-    aliases: ['p'],
+    aliases: ['p', 'poke'],
     cooldown: 1,
     execute(message) {
         let choice = ~~(Math.random() * responses.length);
-        message.channel.send(responses[choice]);
+        message.author.send(responses[choice]);
     }
 }

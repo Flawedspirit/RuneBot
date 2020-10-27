@@ -11,9 +11,9 @@ module.exports = {
     cooldown: 10,
     execute(message) {
         if(config.inviteLink) {
-            message.channel.send(`Add me to a server! ${config.inviteLink}\nMake sure you're logged in.`);
+            message.author.send(`Add me to a server! ${config.inviteLink}\nMake sure you're logged in.`);
         } else {
-            message.channel.send('No invite link defined.');
+            message.author.send('No invite link defined.');
         }
     }
 }
