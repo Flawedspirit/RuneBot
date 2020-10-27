@@ -26,13 +26,15 @@ function loadCommands() {
             let command = require(`./commands/${file}`);
             client.commands.set(command.name, command);
             
-            if(config.debug) logger.logDebug(`Registered command: ${command.name}`, 'DEBUG//INIT');
+            if(config.debug || process.env.DEBUG) logger.logDebug(`Registered command: ${command.name}`, 'DEBUG//INIT');
         }
         resolve();
     });
 }
 
 function connect() {
+    if(config.debug || process.env.DEBUG) logger.logDebug('Starting RuneBot in DEBUG mode.', 'DEBUG//INIT');
+
     logger.logBold('Connecting to Discord service...');
     client.login(config.token).catch(error => {
         logger.logError('Could not connect.');
