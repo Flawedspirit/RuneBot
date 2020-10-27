@@ -37,7 +37,7 @@ function connect() {
 
     logger.logBold('Connecting to Discord service...');
     client.login(config.token).catch(error => {
-        logger.logError('Could not connect.');
+        logger.logError(`Could not connect:\n${error}`);
     });
 }
 
