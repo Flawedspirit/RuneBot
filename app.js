@@ -111,8 +111,6 @@ client.on('message', message => {
 // Shall we begin?
 if(config.debug || process.env.NODE_ENV.trim() === 'dev') logger.logDebug('Starting RuneBot in DEBUG mode', 'DEBUG//INIT');
 
-console.log(process.env);
-
 loadCommands()
     .then(connect)
     .catch(error => {

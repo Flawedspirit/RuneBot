@@ -7,9 +7,9 @@ before_install:
   - rm package-lock.json
 install: npm install
 os: linux
-matrix:
+dist: focal
+jobs:
   include:
-    - dist: focal
     - dist: bionic
 env:
   global:
