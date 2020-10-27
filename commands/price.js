@@ -12,7 +12,7 @@ module.exports = {
     name: 'price',
     description: 'Retrieves data on an item from the Grand Exchange.',
     usage: '<item>',
-    aliases: ['07price'],
+    aliases: ['07price', 'ge'],
     cooldown: 5,
     hasArgs: true,
     execute(message, args) {

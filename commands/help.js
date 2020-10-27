@@ -9,7 +9,7 @@ const config    = reload('../config.json');
 module.exports = {
     name: 'help',
     description: 'List all of RuneBot\'s commands.',
-    aliases: ['?', 'commands'],
+    aliases: ['commands', '?'],
     cooldown: 5,
     execute(message) {
         const messageOut = new Discord.MessageEmbed()

@@ -27,7 +27,9 @@ module.exports = {
             try {
                 const newCommand = require(`./${command.name}.js`);
                 message.client.commands.set(newCommand.name, newCommand);
+
                 message.channel.send(`Reloaded command: ${command.name}.`);
+                if(config.debug || process.env.DEBUG) logger.logDebug(`Reloaded command: ${command.name}`);
             } catch(ex) {
                 logger.logError(`${ex}\n${ex.stack}`, 'ERROR//CMD');
                 message.channel.send(config.errorMessage);

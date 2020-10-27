@@ -15,7 +15,7 @@ module.exports = {
     name: 'bosses',
     description: 'Retrieves your boss kill-counts from the OSRS Hiscores.',
     usage: '<username>',
-    aliases: ['bosses', 'kc'],
+    aliases: ['kc'],
     cooldown: 10,
     hasArgs: true,
     execute(message, args) {
