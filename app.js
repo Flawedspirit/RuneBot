@@ -10,8 +10,6 @@ const reload        = require('require-reload')(require);
 const config        = reload('./config.json');
 const logger        = new(reload('./utils/Logger.class.js'))(config.logTimestamps);
 
-const problemItems  = reload('./utils/problem_items.json');
-
 /* LOCAL VARIABLES */
 const client        = new Discord.Client();
 client.commands     = new Discord.Collection();
@@ -26,15 +24,13 @@ function loadCommands() {
             let command = require(`./commands/${file}`);
             client.commands.set(command.name, command);
             
-            if(config.debug || process.env.DEBUG) logger.logDebug(`Registered command: ${command.name}`, 'DEBUG//INIT');
+            if(config.debug || process.env.NODE_ENV.trim() === 'dev') logger.logDebug(`Registered command: ${command.name}`, 'DEBUG//INIT');
         }
         resolve();
     });
 }
 
 function connect() {
-    if(config.debug || process.env.DEBUG) logger.logDebug('Starting RuneBot in DEBUG mode.', 'DEBUG//INIT');
-
     logger.logBold('Connecting to Discord service...');
     client.login(config.token).catch(error => {
         logger.logError(`Could not connect:\n${error}`);
@@ -113,6 +109,10 @@ client.on('message', message => {
 });
 
 // Shall we begin?
+if(config.debug || process.env.NODE_ENV.trim() === 'dev') logger.logDebug('Starting RuneBot in DEBUG mode', 'DEBUG//INIT');
+
+console.log(process.env);
+
 loadCommands()
     .then(connect)
     .catch(error => {

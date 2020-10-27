@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "debug": "set NODE_ENV=DEBUG && node --trace-warnings app.js",
+    "debug": "set NODE_ENV=dev && node --trace-warnings app.js",
     "generate-docs": "./node_modules/.bin/jsdoc -c .jsdoc.json --verbose"
   },
   "repository": {
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "jsdoc": "^3.6.6",
-    "jsdoc-template": "github:braintree/jsdoc-template"
+    "jsdoc-template": "github:braintree/jsdoc-template",
+    "travis": "^0.1.1"
   }
 }

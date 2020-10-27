@@ -29,7 +29,7 @@ module.exports = {
                 message.client.commands.set(newCommand.name, newCommand);
 
                 message.channel.send(`Reloaded command: ${command.name}.`);
-                if(config.debug || process.env.DEBUG) logger.logDebug(`Reloaded command: ${command.name}`);
+                if(config.debug || process.env.NODE_ENV.trim() === 'dev') logger.logDebug(`Reloaded command: ${command.name}`);
             } catch(ex) {
                 logger.logError(`${ex}\n${ex.stack}`, 'ERROR//CMD');
                 message.channel.send(config.errorMessage);

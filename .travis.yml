@@ -1,5 +1,18 @@
 language: node_js
-node_js:
-  - 15
+node_js: 15
+cache:
+  directories:
+    - node_modules
+before_install:
+  - rm package-lock.json
+install: npm install
+os: linux
+matrix:
+  include:
+    - dist: focal
+    - dist: bionic
+env:
+  global:
+    - TOKEN=$TOKEN
 script:
-  - npm install
+  - npm start
