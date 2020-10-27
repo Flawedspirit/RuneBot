@@ -11,8 +11,3 @@ dist: focal
 jobs:
   include:
     - dist: bionic
-env:
-  global:
-    - TOKEN=$TOKEN
-script:
-  - npm start
