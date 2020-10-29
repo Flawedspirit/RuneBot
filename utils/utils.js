@@ -126,6 +126,7 @@ exports.doHighScoresLookup = function(hiscore, user) {
             case('hiscore_oldschool_hardcore_ironman'):
             case('hiscore_oldschool_ultimate'):
             case('hiscore_oldschool_deadman'):
+            case('hiscore_oldschool_seasonal'):
             default:
                 lookupIndex = [0, 23];
                 break;

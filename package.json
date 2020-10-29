@@ -4,9 +4,9 @@
   "description": "A bot with useful commands for Old School Runescape",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "set NODE_ENV=production && node app.js",
     "debug": "set NODE_ENV=dev && node --trace-warnings app.js",
-    "generate-docs": "./node_modules/.bin/jsdoc -c .jsdoc.json --verbose"
+    "generate-docs": "jsdoc -c .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
