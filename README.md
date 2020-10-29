@@ -11,7 +11,7 @@ Additionally, a list of User IDs can be specified under `"owners": []` to allow 
 
 Once your config has been configured, run the following command (with the root of the bot as your working directory)
 
-```npm start```
+```npm run start-win``` ***or*** ```npm run start-unix``` depending on your OS.
 
 Alternatively, the bot can be run with a more verbose debugging mode by either running
 
