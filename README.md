@@ -15,7 +15,7 @@ Once your config has been configured, run the following command (with the root o
 
 Alternatively, the bot can be run with a more verbose debugging mode by either running
 
-```npm run debug```
+```npm run debug-win```/```npm run debug-unix```
 
 or setting `"debug": true` in your `config.json`.
 
