@@ -11,13 +11,13 @@ Additionally, a list of User IDs can be specified under `"owners": []` to allow 
 
 Once your config has been configured, run the following command (with the root of the bot as your working directory)
 
-```npm run start-win``` ***or*** ```npm run start-unix``` depending on your OS.
+```npm run start-win```/```npm run start-unix``` depending on your OS.
 
 Alternatively, the bot can be run with a more verbose debugging mode by either running
 
-```npm run debug```
+```npm run debug-win```/```npm run debug-unix``` depending on your OS; or
 
-or setting `"debug": true` in your `config.json`.
+setting `"debug": true` in your `config.json`.
 
 ----
 ## Commands and Aliases
@@ -34,7 +34,7 @@ league | 07league, hsl | View league hiscores for `<user>`
 ping | p, poke | Ping the bot
 price | 07price, ge | View `<item>` listing on the Grand Exchange
 reload || Reloads a command config file without restarting the whole bot **[Owner Only]**
-reset || Gets time until the game's faily reset at 00:00 UTC (time displayed is in your local time)
+reset || Gets time until the game's daily reset at 00:00 UTC (time displayed is in your local time)
 stats | 07stats, hs | View standard hiscores for `<user>`
 uimstats | 07stats-uim, hsuim | View ultimate ironman hiscores for `<user>`
 
