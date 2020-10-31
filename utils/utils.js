@@ -130,7 +130,8 @@ exports.doHighScoresLookup = function(hiscore, user) {
                 lookupIndex = [0, 23];
                 break;
             case('hiscore_oldschool_seasonal'):
-            lookupIndex = [0, 24];
+                lookupIndex = [0, 24];
+                break;
             case('hiscore_bosses'):
                 lookupIndex = [35, 78];
         }

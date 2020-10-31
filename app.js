@@ -99,13 +99,20 @@ client.on('message', message => {
         return client.users.cache.get(message.author.id).send('This command can only be used by a server owner.');
     }
 
-    try {        
-        // Execute command if no other blocking condition exists
-        command.execute(message, args);
-    } catch(ex) {
-        logger.logError(ex);
+    return new Promise((resolve) => {
+        resolve(command.execute(message, args));
+    }).catch((error) => {
+        logger.logError(error);
         message.reply(config.errorMessage);
-    }
+    });
+
+    // try {        
+    //     // Execute command if no other blocking condition exists
+    //     command.execute(message, args);
+    // } catch(ex) {
+    //     logger.logError(ex);
+    //     message.reply(config.errorMessage);
+    // }
 });
 
 // Shall we begin?

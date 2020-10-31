@@ -31,9 +31,9 @@ module.exports = {
                 for(let i = result[0]; i <= result[1]; i++) {
                     let level, xp, rank;
         
-                    level   = (result[2][i][1] === '1')  ? '--'  : numFormat.format(result[2][i][1]);
-                    xp      = (result[2][i][2] === '-1') ? 'N/A' : numFormat.format(result[2][i][2]);
-                    rank    = (result[2][i][0] === '-1') ? 'N/A' : numFormat.format(result[2][i][0]);
+                    level   = (result[2][i][1] === '1' || isNaN(result[2][i][1]))  ? '--'  : numFormat.format(result[2][i][1]);
+                    xp      = (result[2][i][2] === '-1' || isNaN(result[2][i][2])) ? 'N/A' : numFormat.format(result[2][i][2]);
+                    rank    = (result[2][i][0] === '-1' || isNaN(result[2][i][0])) ? 'N/A' : numFormat.format(result[2][i][0]);
         
                     table.addRow(utils.getSkillFromIndex(i), level, xp, rank);
                 }
