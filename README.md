@@ -30,6 +30,7 @@ hcstats | 07stats-hc, hshc | View hardcore ironman hiscores for `<user>`
 help | commands, ? | Print a command list in Discord
 invite | oauth, join | Creates a link to invite this bot to your server
 ironstats | 07stats-im, hsim | View ironman hiscores for `<user>`
+league | 07league, hsl | View league hiscores for `<user>`
 ping | p, poke | Ping the bot
 price | 07price, ge | View `<item>` listing on the Grand Exchange
 reload || Reloads a command config file without restarting the whole bot **[Owner Only]**
