@@ -1,0 +1,10 @@
+{
+    "apps": [{
+        "name": "RuneBot",
+        "script": "npm",
+        "args": "start",
+        "watch": true,
+        "wait_ready": true,
+        "max_restarts": 3
+    }]
+}

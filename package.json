@@ -4,10 +4,8 @@
   "description": "A bot with useful commands for Old School Runescape",
   "main": "app.js",
   "scripts": {
-    "start-win": "set NODE_ENV=production && node app.js",
-    "debug-win": "set NODE_ENV=dev && node --trace-warnings app.js",
-    "start-unix": "export NODE_ENV=production && node app.js",
-    "debug-unix": "export NODE_ENV=dev && node --trace-warnings app.js",
+    "start": "cross-env NODE_ENV=production node app.js",
+    "dev": "cross-env NODE_ENV=development node --trace-warnings app.js",
     "generate-docs": "jsdoc -c .jsdoc.json --verbose"
   },
   "repository": {
@@ -32,6 +30,7 @@
     "superagent": "^6.1.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "jsdoc": "^3.6.6",
     "jsdoc-template": "github:braintree/jsdoc-template",
     "travis": "^0.1.1"

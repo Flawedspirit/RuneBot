@@ -27,6 +27,9 @@ function loadCommands() {
             if(config.debug || process.env.NODE_ENV.trim() === 'dev') logger.logDebug(`Registered command: ${command.name}`, 'DEBUG//INIT');
         }
         resolve();
+    }).catch(error => {
+        logger.logError(error);
+        message.reply(config.errorMessage);
     });
 }
 
@@ -99,24 +102,16 @@ client.on('message', message => {
         return client.users.cache.get(message.author.id).send('This command can only be used by a server owner.');
     }
 
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
         resolve(command.execute(message, args));
-    }).catch((error) => {
+    }).catch(error => {
         logger.logError(error);
         message.reply(config.errorMessage);
     });
-
-    // try {        
-    //     // Execute command if no other blocking condition exists
-    //     command.execute(message, args);
-    // } catch(ex) {
-    //     logger.logError(ex);
-    //     message.reply(config.errorMessage);
-    // }
 });
 
 // Shall we begin?
-if(config.debug || process.env.NODE_ENV.trim() === 'dev') logger.logDebug('Starting RuneBot in DEBUG mode', 'DEBUG//INIT');
+if(config.debug || process.env.NODE_ENV.trim() === 'development') logger.logDebug('Starting RuneBot in DEBUG mode', 'DEBUG//INIT');
 
 loadCommands()
     .then(connect)
