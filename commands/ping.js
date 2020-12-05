@@ -8,7 +8,14 @@ const responses = [
     'You have my attention, outlander.',
     '...',
     'Not dignifying that with a response.',
-    'Ping yourself!'
+    'Ping yourself!',
+    'Reporting for duty!',
+    'One ping, Vasily.',
+    'That tickles!',
+    'At your service!',
+    'O rly?',
+    'Oooh! ( ͡° ͜ʖ ͡°)',
+    'Да, Comrade?'
 ];
 
 module.exports = {
