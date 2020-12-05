@@ -181,11 +181,11 @@ exports.doItemLookup = function(item) {
 
         if(item in problemItems) {
             exchange.getItemById(problemItems[item]).then((response) => {
-                resolve(response);
+                resolve(response);                
             }).catch((error) => doError(item, error));
         } else {
             exchange.getItemByName(item).then((response) => {
-                resolve(response);
+                resolve(response);                
             }).catch((error) => doError(item, error));
         }
     });

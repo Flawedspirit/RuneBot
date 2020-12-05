@@ -11,12 +11,19 @@
     ],
     "source": {
         "includePattern": ".+\\.js(doc|x)?$",
-        "include": ["."],
-        "exclude": ["node_modules", "docs"]
+        "include": [
+            "."
+        ],
+        "exclude": [
+            "node_modules",
+            "docs"
+        ]
     },
     "tags": {
         "allowUnknownTags": true,
-        "dictionaries": ["jsdoc"]
+        "dictionaries": [
+            "jsdoc"
+        ]
     },
     "templates": {
         "cleverLinks": true,
