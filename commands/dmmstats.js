@@ -15,7 +15,7 @@ module.exports = {
     aliases: ['07stats-dmm', 'hsdmm'],
     cooldown: 10,
     hasArgs: true,
-    execute(message, args) {
+    execute(_, message, args) {
         let user = args.join(' ').trim();
         let table = new asciiTable();
 

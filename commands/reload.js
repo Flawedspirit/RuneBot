@@ -13,7 +13,7 @@ module.exports = {
     hidden: true,
     requireOwner: true,
     hasArgs: true,
-    execute(message, args) {
+    execute(_, message, args) {
         if (!args.length) {
             return message.channel.send('You must provide a command to reload.');
         } else {

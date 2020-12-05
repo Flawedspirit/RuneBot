@@ -11,12 +11,12 @@ module.exports = {
     description: 'List all of RuneBot\'s commands.',
     aliases: ['commands', '?'],
     cooldown: 5,
-    execute(message) {
+    execute(client, message) {
         const messageOut = new Discord.MessageEmbed()
             .setColor('#d4af37')
             .setTitle('RuneBot Help')
             .setDescription('Hello there! ( ͡° ͜ʖ ͡°)')
-            .setThumbnail('https://cdn.discordapp.com/avatars/729732623131344968/27fb9cacad3cd87cd4d70aed06a380c1.png')
+            .setThumbnail(client.user.displayAvatarURL());
 
         const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 

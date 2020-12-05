@@ -15,7 +15,7 @@ module.exports = {
     aliases: ['07price', 'ge'],
     cooldown: 5,
     hasArgs: true,
-    execute(message, args) {
+    execute(_, message, args) {
         let item = args.join(' ').trim();
 
         // Send a "bot is typing..." status immediately to notify user the bot is working

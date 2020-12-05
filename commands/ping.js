@@ -16,7 +16,7 @@ module.exports = {
     description: 'Pings the bot to make sure it\'s paying attention.',
     aliases: ['p', 'poke'],
     cooldown: 1,
-    execute(message) {
+    execute(_, message) {
         let choice = ~~(Math.random() * responses.length);
         message.author.send(responses[choice]);
     }

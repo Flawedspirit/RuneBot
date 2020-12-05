@@ -9,7 +9,7 @@ module.exports = {
     description: 'Creates an invite link for this bot.',
     aliases: ['oauth', 'join'],
     cooldown: 10,
-    execute(message) {
+    execute(_, message) {
         if (config.inviteLink) {
             message.author.send(`Add me to a server! ${config.inviteLink}\nMake sure you're logged in.`);
         } else {

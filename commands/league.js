@@ -17,7 +17,7 @@ module.exports = {
     aliases: ['07league', 'hsl'],
     cooldown: 10,
     hasArgs: true,
-    execute(message, args) {
+    execute(_, message, args) {
         let user = args.join(' ').trim();
 
         // Send a "bot is typing..." status immediately to notify user the bot is working

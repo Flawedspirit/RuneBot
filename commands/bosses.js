@@ -4,9 +4,7 @@ const reload = require('require-reload');
 const superagent = require('superagent');
 
 /* REQUIRED FILES */
-const config = reload('../config.json');
 const utils = reload('../utils/utils.js');
-const logger = new (reload('../utils/Logger.class.js'))(config.logTimestamps);
 
 /* SET NUMBER FORMAT */
 const numFormat = new Intl.NumberFormat('en-US');
@@ -18,7 +16,7 @@ module.exports = {
     aliases: ['kc'],
     cooldown: 10,
     hasArgs: true,
-    execute(message, args) {
+    execute(_, message, args) {
         let user = args.join(' ').trim();
 
         // Send a "bot is typing..." status immediately to notify user the bot is working
