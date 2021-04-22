@@ -10,7 +10,7 @@ const responses = [
     'Not dignifying that with a response.',
     'Ping yourself!',
     'Reporting for duty!',
-    'One ping, Vasily.',
+    'One ping only, Vasily.',
     'That tickles!',
     'At your service!',
     'O rly?',
